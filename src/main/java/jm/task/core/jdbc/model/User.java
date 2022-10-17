@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 @Table
 public class User {
+
     @Id
     private Long id;
 
@@ -68,5 +69,24 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (this == null || this.getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return name.equals(user.name) &&
+                lastName.equals(user.lastName) &&
+                age.equals(user.age);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + age.hashCode();
+        return result;
     }
 }
